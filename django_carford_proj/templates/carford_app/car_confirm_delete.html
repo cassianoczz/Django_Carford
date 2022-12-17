@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}System - Carford Delete Owner{% endblock title %}
+{% block body %}
+    <body>
+        <table>
+            <h1>Delete Owner</h1>
+            <thead>
+                <tr>
+                    <th>Owner</th>
+                    <th>Model</th>
+                    <th>Color</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <form method="post" action=".">
+                        {% csrf_token %}
+                        <td>{{object.owner.name}}</td>
+                        <td>{{object.model}}</td>
+                        <td>{{object.color}}</td>
+                        <td>
+                            <p>Are you sure to delete?</p>
+                            <input type="submit" value="Delete">
+                            <input type="reset" value="Cancel" onclick="location.href = '{% url 'carford_app:owner_detail' object.owner.id %}'">
+                        </td> 
+                    </form>
+                </tr>
+            </tbody>    
+        </table>
+    </body>
+{% endblock body %}

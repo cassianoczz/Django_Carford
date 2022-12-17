@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block body %}
+    <body>
+        <table>
+            <h1>Car Registration</h1>
+            <thead>
+                <tr>
+                    <th>Owner</th>
+                    <th>Model</th>
+                    <th>Color</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <form method="post" action=".">
+                        {% csrf_token %}
+                        <td>{{form.owner}}</td>
+                        <td>{{form.model}}</td>
+                        <td>{{form.color}}</td>
+                        <td>
+                            {% if 'create' in request.path %}
+                            <input type="submit" value="Create">
+                            {% elif 'update' in request.path %}
+                            <input type="submit" value="Update">
+                            {% endif %}
+                            <input type="reset" value="Cancel" onclick="location.href = '{% url 'carford_app:owner_list' %}'">
+                        </td> 
+                    </form>
+                </tr>
+            </tbody>    
+        </table>
+    </body>
+{% endblock body %}

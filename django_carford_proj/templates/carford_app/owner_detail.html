@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}System - Carford Details Owner{% endblock title %}
+{% block body %}
+    <body>
+        <table>
+            <h1>{{object.0.owner.name}}'s cars </h1>
+            <thead>
+                <tr>
+                    <th>Model</th>
+                    <th>Color</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for car in object %}
+                <tr>
+                    <td>{{car.model}}</td>
+                    <td>{{car.color}}</td> 
+                    <td> 
+                        <input type="submit" value="Update Car" onclick="location.href = '{% url 'carford_app:car_update' car.id %}'">
+                        <input type="submit" value="Delete Car" onclick="location.href = '{% url 'carford_app:car_delete' car.id %}'">
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>    
+        </table>
+        <p>
+            {% if object.2 %}
+            {% else %}
+            <input type="submit" value="Add Car" onclick="location.href = '{% url 'carford_app:car_create' object.0.owner.id %}'">  
+            {% endif %}    
+            <input type="button" value="Return owners list" onclick="location.href = '{% url 'carford_app:owner_list' %}'">
+        </p>
+    </body>
+{% endblock body %}

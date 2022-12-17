@@ -1,0 +1,14 @@
+version: '3'
+services:
+  django_carford:
+    build: 
+      context: .
+    ports:
+      - 8000:8000
+    volumes:
+      - django_carford_vol:/app
+      - ./django_carford_proj/:/app/django_carford_proj
+    command: sh -c "cd django_carford_proj && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+
+volumes:
+  django_carford_vol:
